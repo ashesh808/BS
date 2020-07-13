@@ -117,9 +117,10 @@ export default {
       align-items: flex-end;
       .upper{
         font-weight: 500;
-        font-size: 20px;
+        font-size: 14px;
         margin-bottom: 16px;
         margin-top: 8px;
+
       }
 
       .subtitle {

@@ -5,7 +5,7 @@
         <div class="level-left">
           <div class="level-item">
             <img src="@/assets/logo2.png" />
-            <i class="las la-bars is-hidden-desktop is-hidden-tablet" @click="toggle"></i>
+            <i class="fa fa-bars is-hidden-desktop is-hidden-tablet" @click="toggle"></i>
           </div>
         </div>
         <div class="level-right">
@@ -20,13 +20,13 @@
               />
             </p>
             <p class="control">
-              <button class="button is-warning is-radiusless search px-2" @click="search">
-                <i class="las la-search"></i>
+              <button class="button is-warning is-radiusless search px-2">
+                <i class="fa fa-search"></i>
               </button>
             </p>
             <p class="control">
               <button class="button is-danger is-radiusless" @click="$store.commit('show')">
-                <i class="las la-book"></i>{{list}}   Book(S)
+                <i class="fa fa-book"></i>{{list}}   Book(S)
               </button>
             </p>
           </div>

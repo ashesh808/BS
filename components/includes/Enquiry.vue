@@ -28,7 +28,7 @@
           <ul>
             <li>
               <div class="has-text-centered" :class="{'active': step==0, 'completed': step>0}">
-                <i class="las la-book"></i>
+                <i class="fa fa-book"></i>
                 <br />Book Enquiry
               </div>
             </li>
@@ -37,7 +37,7 @@
                 <div
                   class="has-text-centered"
                   :class="{'active': step==2, 'completed': step>2, 'disabled': step<2}">
-                  <i class="las la-user-tie"></i>
+                  <i class="fa fa-user-tie"></i>
                   <br />Contact Information
                 </div>
               </a>

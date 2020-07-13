@@ -1,5 +1,5 @@
 <template>
-   <div class="container">
+  <div class="container">
     <div class="services">
       <h1 class="is-size-5">Featured</h1>
     </div>
@@ -16,7 +16,8 @@
       <div
         class="column is-4-tablet is-3-desktop"
         v-for="(medicine,index) in medicines"
-        :key="index">
+        :key="index"
+      >
         <div class="card">
           <div class="card-image">
             <figure class="image is-4by4" v-show="!lazy.includes(index)">
@@ -24,7 +25,7 @@
             </figure>
             <transition name="fade">
               <figure class="image is-4by4" v-show="lazy.includes(index)">
-                <img src="https://images-na.ssl-images-amazon.com/images/I/71FxgtFKcQL.jpg" :alt="medicine.name" @load="lazy.push(index)" />
+                <img src="~/assets/placeholder.jpeg" :alt="medicine.name" @load="lazy.push(index)" />
               </figure>
             </transition>
           </div>
@@ -116,16 +117,19 @@ export default {
       align-items: flex-end;
       .upper{
         font-weight: 500;
-        font-size: 20px;
+        font-size: 14px;
         margin-bottom: 16px;
         margin-top: 8px;
+
       }
+
       .subtitle {
         font-weight: 500;
         font-size: 14px;
         margin-bottom: 16px;
         margin-top: 8px;
       }
+      
     }
 
     figure {
@@ -177,5 +181,6 @@ export default {
   img {
     margin: auto;
   }
+  
 }
 </style>
