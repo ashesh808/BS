@@ -89,5 +89,10 @@ export default {
 
   env: {
     url: 'https://app.medmandu.life'
+  },
+
+  router: {
+    base: '/dist/'
   }
+  
 };
