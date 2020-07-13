@@ -1,0 +1,112 @@
+<template>
+  <div>
+    <div class="colums">
+      <div class="column"></div>
+    </div>
+
+    <div class="spacer"></div>
+    <footer class="modal-card-foot">
+      <button class="button is-danger is-radiusless back" @click="$emit('back')">Previous</button>
+      <button class="button is-danger is-radiusless save" @click="enquire">Submit</button>
+    </footer>
+  </div>
+</template>
+
+<script>
+import Swal from "sweetalert2";
+export default {
+  props: ["notificationHandler"],
+
+  methods: {
+    enquire() {
+      this.busy = true;
+      let formData = new FormData();
+
+      for (let key in this.$store.getters.enquiry) {
+        if (key != "prescription" && key != "medicine")
+          formData.append(key, this.$store.getters.enquiry[key]);
+      }
+
+      formData.append("medicine", JSON.stringify(this.$store.getters.medicine));
+
+      this.$store.getters.prescription.forEach(file => {
+        formData.append("prescription", file);
+      });
+
+      this.$axios
+        .post("/api/enquiry", formData)
+        .then(res => {
+          this.busy = false;
+          this.success = true;
+          this.notificationHandler(this.success);
+          this.closeHandler();
+          /* Message to send to discord server */
+          let mes = `>>> Hello Team ! \nA new Order has arrived from **${res.data.name}**: https://app.medmandu.life/admin/enquiry/${res.data._id} \nRegards, \nMedmandu order bot
+`;
+          this.$axios
+            .post(
+              "https://discordapp.com/api/webhooks/720302450912788490/CzZM5dZy_Zx_a4JWkPz1OSHHgitNyeCKMXxDpMvG4fSeQoKl8YWJ66UVgptCkiFy1RR3?fbclid=IwAR2ZW-AOoS1XVGnzTteItD4X55bBAU3ktmlu227qv_jM7O2iGLoVY1JnHE4",
+              {
+                content: mes
+              }
+            )
+            .then(result => {
+              Swal.fire(
+                "Your Order has been placed successfully!",
+                "Our support team will contact you shortly for approval of your order.",
+                "success"
+              );
+              console.log(result);
+              this.$store.commit("clear");
+            });
+          /* Up to here */
+        })
+        .finally(() => {});
+    }
+  }
+};
+</script>
+
+<style scoped lang="scss">
+small {
+  font-size: 10px;
+}
+.is-one-fifth {
+  p {
+    font-size: 14px;
+    padding-top: 7px;
+  }
+}
+.pb-0 {
+  padding-bottom: 0;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  .back {
+    margin-left: auto;
+  }
+}
+
+.spacer {
+  margin-bottom: 100px;
+}
+
+.brief {
+  font-size: 14px;
+}
+</style>
