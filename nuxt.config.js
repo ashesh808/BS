@@ -1,8 +1,9 @@
 export default {
   mode: "universal",
-  // router: {
-  //   mode: 'hash'
-  // },
+  router: {
+     mode: 'hash',
+     base: '/dist/'
+   },
   /*
    ** Headers of the page
    */
@@ -91,8 +92,5 @@ export default {
     url: 'https://app.medmandu.life'
   },
 
-  router: {
-    base: '/dist/'
-  }
-  
+
 };
